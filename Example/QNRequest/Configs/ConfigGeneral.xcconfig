@@ -1,0 +1,16 @@
+//
+//  ConfigGeneral.xcconfig
+//  TGFood
+//
+//  Created by Son on 1/4/19.
+//  Copyright © 2019 lala. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+APP_VERSION_NUMBER=1.0.0
+IOS_APP_VERSION=12
+APP_VERSION_BUILD=12
+
+ACCESS_TOKEN=HHYA12QW7E9K1M6E8K283E1ME7ONTZ5Y

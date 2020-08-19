@@ -1,0 +1,23 @@
+PODS:
+  - Alamofire (4.9.1)
+  - QNRequest (0.1.0):
+    - Alamofire (~> 4.9.1)
+
+DEPENDENCIES:
+  - QNRequest (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+
+EXTERNAL SOURCES:
+  QNRequest:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  QNRequest: fc1e14141a2186c28d72efc79fa9cf57861a2088
+
+PODFILE CHECKSUM: 990dca59e22632e50ba1a6fba1b09fac95ee47c7
+
+COCOAPODS: 1.8.4

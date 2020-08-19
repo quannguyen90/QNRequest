@@ -1,0 +1,6 @@
+framework module Pods_QNRequest_Tests {
+  umbrella header "Pods-QNRequest_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

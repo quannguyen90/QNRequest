@@ -1,0 +1,6 @@
+framework module QNRequest {
+  umbrella header "QNRequest-umbrella.h"
+
+  export *
+  module * { export * }
+}

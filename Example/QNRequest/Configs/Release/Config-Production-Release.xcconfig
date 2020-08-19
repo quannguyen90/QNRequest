@@ -1,0 +1,18 @@
+//
+//  Config-Production-Release.xcconfig
+//  TGFood
+//
+//  Created by quan nguyen on 4/12/19.
+//  Copyright © 2019 lala. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+#include "../ConfigGeneral.xcconfig"
+#include "Pods/Target Support Files/Pods-QNRequest_Example/Pods-QNRequest_Example.release.xcconfig"
+
+PRODUCT_DISPLAY_NAME=iPOS Billing
+HTTP_PROTOCOL=https
+BASE_URL_API_ENDPOINT=apibilling.iposdev.com/billing
+//BASE_URL_API_ENDPOINT=apibilling.ipos.vn/billing
+SERVICE_PATH=billing

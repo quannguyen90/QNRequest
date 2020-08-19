@@ -1,0 +1,9 @@
+use_frameworks!
+
+target 'QNRequest_Example' do
+  pod 'QNRequest', :path => '../'
+
+  target 'QNRequest_Tests' do
+    inherit! :search_paths
+  end
+end
