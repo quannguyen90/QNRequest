@@ -23,7 +23,7 @@ let ERROR_MESSAGE_PARSER_DATA = NSLocalizedString("Có lỗi xảy ra, xin vui l
 let ERROR_CODE_SESSION_EXPIRED = 1406
 let ERROR_MESSAGE_SESSION_EXPIRED = NSLocalizedString("Phiên làm việc của bạn đã hết hạn, xin vui lòng đăng nhập lại", comment: "")
 
-enum ErrorApp: Error {
+public enum ErrorApp: Error {
     
     case httpError
     case defaultError(message: String?)
@@ -31,7 +31,7 @@ enum ErrorApp: Error {
     case parserData
     case sessionExpired(message: String?)
     
-    func getCode() -> Int {
+    public func getCode() -> Int {
         switch self {
         case .defaultError:
             return ERROR_CODE_DEFAULT
@@ -51,7 +51,7 @@ enum ErrorApp: Error {
         
     }
     
-    func getMessage() -> String {
+    public func getMessage() -> String {
         switch self {
         case .defaultError(message: let message):
             return message ??  ERROR_MESSAGE_DEFAULT
@@ -71,7 +71,7 @@ enum ErrorApp: Error {
         }
     }
     
-    static func parserError(errorData: [String: Any]) -> ErrorApp? {
+    public static func parserError(errorData: [String: Any]) -> ErrorApp? {
         
         guard let data = errorData["error"] as? [String: Any] else {
             return nil

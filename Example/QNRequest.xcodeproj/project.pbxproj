@@ -15,13 +15,6 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		88B255485FA88BDBAFA6B266 /* Pods_QNRequest_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 563F156EF6074C1E74034BAF /* Pods_QNRequest_Example.framework */; };
-		A8984A1D24EB91A500F26A2D /* ApiCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8984A1724EB91A500F26A2D /* ApiCommand.swift */; };
-		A8984A1E24EB91A500F26A2D /* ApiParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8984A1824EB91A500F26A2D /* ApiParser.swift */; };
-		A8984A1F24EB91A500F26A2D /* FABIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8984A1A24EB91A500F26A2D /* FABIResponse.swift */; };
-		A8984A2024EB91A500F26A2D /* ApiOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8984A1B24EB91A500F26A2D /* ApiOperations.swift */; };
-		A8984A2124EB91A500F26A2D /* ApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8984A1C24EB91A500F26A2D /* ApiRequest.swift */; };
-		A8984A2424EB925A00F26A2D /* ErrorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8984A2324EB925900F26A2D /* ErrorApp.swift */; };
-		A8984A2624EB92AB00F26A2D /* AppApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8984A2524EB92AB00F26A2D /* AppApi.swift */; };
 		A8984A2F24EB945D00F26A2D /* Config-STG-Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A8984A2924EB945D00F26A2D /* Config-STG-Release.xcconfig */; };
 		A8984A3024EB945D00F26A2D /* Config-Production-Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A8984A2A24EB945D00F26A2D /* Config-Production-Release.xcconfig */; };
 		A8984A3124EB945D00F26A2D /* ConfigGeneral.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = A8984A2B24EB945D00F26A2D /* ConfigGeneral.xcconfig */; };
@@ -59,13 +52,6 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		6DDDE5369F5D51150752DA19 /* Pods_QNRequest_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QNRequest_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A8984A1724EB91A500F26A2D /* ApiCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiCommand.swift; sourceTree = "<group>"; };
-		A8984A1824EB91A500F26A2D /* ApiParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiParser.swift; sourceTree = "<group>"; };
-		A8984A1A24EB91A500F26A2D /* FABIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FABIResponse.swift; sourceTree = "<group>"; };
-		A8984A1B24EB91A500F26A2D /* ApiOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiOperations.swift; sourceTree = "<group>"; };
-		A8984A1C24EB91A500F26A2D /* ApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiRequest.swift; sourceTree = "<group>"; };
-		A8984A2324EB925900F26A2D /* ErrorApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorApp.swift; sourceTree = "<group>"; };
-		A8984A2524EB92AB00F26A2D /* AppApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppApi.swift; sourceTree = "<group>"; };
 		A8984A2924EB945D00F26A2D /* Config-STG-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Config-STG-Release.xcconfig"; sourceTree = "<group>"; };
 		A8984A2A24EB945D00F26A2D /* Config-Production-Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = "Config-Production-Release.xcconfig"; sourceTree = "<group>"; };
 		A8984A2B24EB945D00F26A2D /* ConfigGeneral.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = ConfigGeneral.xcconfig; sourceTree = "<group>"; };
@@ -120,7 +106,6 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
-				A8984A1524EB918200F26A2D /* Classes */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for QNRequest */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -189,45 +174,6 @@
 				2FA351EFC37BF467BC7E7DA6 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
-			sourceTree = "<group>";
-		};
-		A8984A1524EB918200F26A2D /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				A8984A2524EB92AB00F26A2D /* AppApi.swift */,
-				A8984A2224EB925900F26A2D /* Error */,
-				A8984A1624EB91A500F26A2D /* Request */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		A8984A1624EB91A500F26A2D /* Request */ = {
-			isa = PBXGroup;
-			children = (
-				A8984A1724EB91A500F26A2D /* ApiCommand.swift */,
-				A8984A1824EB91A500F26A2D /* ApiParser.swift */,
-				A8984A1924EB91A500F26A2D /* Models */,
-				A8984A1B24EB91A500F26A2D /* ApiOperations.swift */,
-				A8984A1C24EB91A500F26A2D /* ApiRequest.swift */,
-			);
-			name = Request;
-			path = ../../../../iPOS/iPOSBilling/Source/Lib/Request;
-			sourceTree = "<group>";
-		};
-		A8984A1924EB91A500F26A2D /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				A8984A1A24EB91A500F26A2D /* FABIResponse.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		A8984A2224EB925900F26A2D /* Error */ = {
-			isa = PBXGroup;
-			children = (
-				A8984A2324EB925900F26A2D /* ErrorApp.swift */,
-			);
-			path = Error;
 			sourceTree = "<group>";
 		};
 		A8984A2724EB945D00F26A2D /* Configs */ = {
@@ -439,15 +385,8 @@
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				A8984A3524EB970100F26A2D /* IPUser.swift in Sources */,
-				A8984A1E24EB91A500F26A2D /* ApiParser.swift in Sources */,
-				A8984A1D24EB91A500F26A2D /* ApiCommand.swift in Sources */,
-				A8984A1F24EB91A500F26A2D /* FABIResponse.swift in Sources */,
-				A8984A2424EB925A00F26A2D /* ErrorApp.swift in Sources */,
-				A8984A2024EB91A500F26A2D /* ApiOperations.swift in Sources */,
-				A8984A2124EB91A500F26A2D /* ApiRequest.swift in Sources */,
 				A8984A3724EB974B00F26A2D /* IPConfig.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-				A8984A2624EB92AB00F26A2D /* AppApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: - Webservice api comminucation with server
-enum ApiName: String {
+public enum ApiName: String {
     //App
     case register = "user"
     case loginFacebook = "login_facebook"
@@ -78,12 +78,12 @@ enum ApiName: String {
     case paymentMethod = "payment_methods"
 }
 
-enum ApiHeaderName: String {
+public enum ApiHeaderName: String {
     case accessToken = "access_token"
     case userToken = "token"
 }
 
-enum ApiType: String {
+public enum ApiType: String {
     case user = "user"
     case report = "report"
     case catalogues = "catalogues"
@@ -98,9 +98,9 @@ enum ApiType: String {
 }
 
 
-struct AppApiConstant {
+public struct AppApiConstant {
 
-    static var BASE_URL: String {
+    public static var BASE_URL: String {
         get {
             let http = Bundle.main.infoDictionary!["HTTP_PROTOCOL"] as! String
             let url = Bundle.main.infoDictionary!["BASE_URL_API_ENDPOINT"] as! String
@@ -108,14 +108,14 @@ struct AppApiConstant {
         }
     }
     
-    static var ACCESS_TOKEN: String {
+    public static var ACCESS_TOKEN: String {
         get {
             let url = Bundle.main.infoDictionary!["ACCESS_TOKEN"] as! String
             return url
         }
     }
     
-    static var SERVICE_PATH: String {
+    public static var SERVICE_PATH: String {
           get {
               let url = Bundle.main.infoDictionary!["SERVICE_PATH"] as! String
               return url
@@ -123,7 +123,7 @@ struct AppApiConstant {
     }
     
 //http://testdw.ipos.vn/api/v1/login
-    static func getUrlRequest(apiType: ApiType, apiName: String, version: String) -> String {
+    public static func getUrlRequest(apiType: ApiType, apiName: String, version: String) -> String {
         if apiType == .none {
             return BASE_URL + "/api/" + "/" + apiName
         }
@@ -134,7 +134,6 @@ struct AppApiConstant {
         var header = [String: String]()
         header["Content-Type"] = "application/json"
         header[ApiHeaderName.accessToken.rawValue] = ACCESS_TOKEN
-
         return header
     }
 }
