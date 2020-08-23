@@ -34,7 +34,7 @@ class ViewController: UIViewController {
 }
 
 // MARK: - ApiOperation
-extension ApiOperations {
+class ApiOperations {
     static func login(_ email: String,
                               password: String,
                               success: @escaping (_ userInfo: ApiResult<IPUser>) -> (),

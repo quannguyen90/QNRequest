@@ -7,8 +7,9 @@
 #
 
 Pod::Spec.new do |s|
+  s.swift_versions = ['5.0']
   s.name             = 'QNRequest'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.summary          = 'A short description of QNRequest.'
 
 # This description is used to generate tags and improve search results.
@@ -23,8 +24,10 @@ TODO: Add long description of the pod here.
   s.homepage         = 'https://github.com/quannguyen90/QNRequest'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'quannguyen90' => 'quannv.tm@gmail.com' }
-  s.source           = { :git => 'https://github.com/quannguyen90/QNRequest.git', :tag => s.version.to_s }
+  s.source           = { :path => '/Users/quannguyen/Documents/iOSProject/Lib/QNRequest' }
   s.ios.deployment_target = '10.0'
   s.source_files = 'QNRequest/Classes/**/*'
   s.dependency 'Alamofire', '~> 4.9.1'
 end
+#/Users/quannguyen/Documents/iOSProject/Lib/QNRequest/Example/QNRequest.xcodeproj
+#pod

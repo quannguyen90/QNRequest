@@ -17,16 +17,20 @@ public enum ApiRequestType {
     case put
 }
 
-public class ApiRequest: ApiCommand {
+public class ApiRequest: NSObject, ApiCommand {
+    
+    public override init() {
+        super.init()
+    }
     
     var type: ApiRequestType = .get
     public var params: [String: Any] = [:]
-    public var header: [String: String] = AppApiConstant.getAuthHeader()
+    public var header: [String: String] = [:]
     public var urlRequest = ""
     var image: UIImage?
 
     
-    public init(urlRequest: String, type: ApiRequestType) {
+     public init(urlRequest: String, type: ApiRequestType) {
         self.urlRequest = urlRequest
         self.type = type
     }
@@ -36,7 +40,7 @@ public class ApiRequest: ApiCommand {
     }
     
     // MARK: response List Object paging
-   public func excuteWithResponseListPaging<T:Codable>(success: @escaping (ApiResultPaging<T>) -> (), fail: @escaping (ErrorApp) -> ()) {
+    public func excuteWithResponseListPaging<T:Codable>(success: @escaping (ApiResultPaging<T>) -> (), fail: @escaping (ErrorApp) -> ()) {
         self.params = getParam()
                debugPrint("---------------- request ---------------")
                debugPrint("url: ", urlRequest)
@@ -111,8 +115,11 @@ public class ApiRequest: ApiCommand {
         
     func uploadImageWithResponseListPaging<T:Codable>(image: UIImage, success: @escaping (ApiResultPaging<T>) -> (), fail: @escaping (ErrorApp) -> ()) {
         
-        guard let imageData = UIImagePNGRepresentation(image) else {return}
-        
+        guard let imageData = image.pngData()else {
+                   fail(ErrorApp.defaultError(message: nil))
+                   return
+               }
+               
         Alamofire.upload(multipartFormData:{ multipartFormData in
             debugPrint("fffffff")
             let fileName = "image_\(Date().timeIntervalSince1970).png"
@@ -220,7 +227,7 @@ public class ApiRequest: ApiCommand {
         
     func uploadImageWithResponseList<T:Codable>(image: UIImage, success: @escaping (_ listItem: [T]) -> (), fail: @escaping (ErrorApp) -> ()) {
         
-        guard let imageData = UIImagePNGRepresentation(image) else {
+        guard let imageData = image.pngData()else {
             fail(ErrorApp.defaultError(message: nil))
             return
         }
@@ -332,7 +339,7 @@ public class ApiRequest: ApiCommand {
         
     func uploadImage<T:Codable>(image: UIImage, success: @escaping (ApiResult<T>) -> (), fail: @escaping (ErrorApp) -> ()) {
         
-        guard let imageData = UIImagePNGRepresentation(image) else {
+        guard let imageData = image.pngData()else {
             fail(ErrorApp.defaultError(message: nil))
             return
         }
@@ -444,11 +451,11 @@ public class ApiRequest: ApiCommand {
     }
         
     func uploadImage<T:Codable>(image: UIImage, success: @escaping (T) -> (), fail: @escaping (ErrorApp) -> ()) {
-        
-        guard let imageData = UIImagePNGRepresentation(image) else {
-            return
-        }
-        
+        guard let imageData = image.pngData()else {
+                   fail(ErrorApp.defaultError(message: nil))
+                   return
+               }
+               
         Alamofire.upload(multipartFormData:{ multipartFormData in
             debugPrint("fffffff")
             let fileName = "image.png"

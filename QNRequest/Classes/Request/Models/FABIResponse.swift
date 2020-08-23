@@ -9,7 +9,7 @@
 import Foundation
 
 public class ApiResultPaging<T:Codable>: Codable {
-    var data: [T]?
+    public var data: [T]?
     
     private enum CodingKeys : String, CodingKey {
         case data = "data"
@@ -18,10 +18,10 @@ public class ApiResultPaging<T:Codable>: Codable {
 
 
 public class ApiResult<T:Codable>: Codable {
-    var data: T?
+    public var data: T?
 }
 
 public class ApiAhamoveResult<T:Codable>: Codable {
-    var features: [T]?
+    public var features: [T]?
 }
 
