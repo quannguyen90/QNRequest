@@ -30,6 +30,17 @@ public class ApiRequest: NSObject, ApiCommand {
     var image: UIImage?
 
     
+    func getParameterEncoding() -> ParameterEncoding {
+        if type == .get {
+            return URLEncoding.default
+        }
+        
+        if header["Content-Type"] == "application/json" {
+            return JSONStringArrayEncoding.init(array: [])
+        }
+        return URLEncoding.default
+    }
+    
      public init(urlRequest: String, type: ApiRequestType) {
         self.urlRequest = urlRequest
         self.type = type
@@ -70,7 +81,7 @@ public class ApiRequest: NSObject, ApiCommand {
         let request = Alamofire.request(urlRequest,
                                         method: .put,
                                         parameters: params,
-                                        encoding: JSONStringArrayEncoding.init(array: []),
+                                        encoding: getParameterEncoding(),
                                         headers: header)
         
         request.responseJSON { (response) in
@@ -86,7 +97,7 @@ public class ApiRequest: NSObject, ApiCommand {
         let request = Alamofire.request(urlRequest,
                                         method: .post,
                                         parameters: params,
-                                        encoding: JSONStringArrayEncoding.init(array: []),
+                                        encoding: getParameterEncoding(),
                                         headers: header)
         
         request.responseJSON { (response) in
@@ -102,7 +113,7 @@ public class ApiRequest: NSObject, ApiCommand {
         let request = Alamofire.request(urlRequest,
                                         method: .get,
                                         parameters: params,
-                                        encoding: URLEncoding.default,
+                                        encoding: getParameterEncoding(),
                                         headers: header)
         
         request.responseJSON { (response) in
@@ -182,7 +193,7 @@ public class ApiRequest: NSObject, ApiCommand {
         let request = Alamofire.request(urlRequest,
                                         method: .put,
                                         parameters: params,
-                                        encoding: JSONStringArrayEncoding.init(array: []),
+                                        encoding: getParameterEncoding(),
                                         headers: header)
         
         request.responseJSON { (response) in
@@ -198,7 +209,7 @@ public class ApiRequest: NSObject, ApiCommand {
         let request = Alamofire.request(urlRequest,
                                         method: .post,
                                         parameters: params,
-                                        encoding: JSONStringArrayEncoding.init(array: []),
+                                        encoding: getParameterEncoding(),
                                         headers: header)
         
         request.responseJSON { (response) in
@@ -214,7 +225,7 @@ public class ApiRequest: NSObject, ApiCommand {
         let request = Alamofire.request(urlRequest,
                                         method: .get,
                                         parameters: params,
-                                        encoding: URLEncoding.default,
+                                        encoding: getParameterEncoding(),
                                         headers: header)
         
         request.responseJSON { (response) in
@@ -294,7 +305,7 @@ public class ApiRequest: NSObject, ApiCommand {
         let request = Alamofire.request(urlRequest,
                                         method: .put,
                                         parameters: params,
-                                        encoding: URLEncoding.default,
+                                        encoding: getParameterEncoding(),
                                         headers: header)
         
         request.responseJSON { (response) in
@@ -310,7 +321,7 @@ public class ApiRequest: NSObject, ApiCommand {
         let request = Alamofire.request(urlRequest,
                                         method: .post,
                                         parameters: params,
-                                        encoding: URLEncoding.default,
+                                        encoding: getParameterEncoding(),
                                         headers: header)
         
         request.responseJSON { (response) in
@@ -326,7 +337,7 @@ public class ApiRequest: NSObject, ApiCommand {
         let request = Alamofire.request(urlRequest,
                                         method: .get,
                                         parameters: params,
-                                        encoding: URLEncoding.default,
+                                        encoding: getParameterEncoding(),
                                         headers: header)
         
         request.responseJSON { (response) in
@@ -407,7 +418,7 @@ public class ApiRequest: NSObject, ApiCommand {
         let request = Alamofire.request(urlRequest,
                                         method: .put,
                                         parameters: params,
-                                        encoding: JSONStringArrayEncoding.init(array: []),
+                                        encoding: getParameterEncoding(),
                                         headers: header)
         
         request.responseJSON { (response) in
@@ -423,7 +434,7 @@ public class ApiRequest: NSObject, ApiCommand {
         let request = Alamofire.request(urlRequest,
                                         method: .post,
                                         parameters: params,
-                                        encoding: JSONStringArrayEncoding.init(array: []),
+                                        encoding: getParameterEncoding(),
                                         headers: header)
         
         request.responseJSON { (response) in
@@ -439,7 +450,7 @@ public class ApiRequest: NSObject, ApiCommand {
         let request = Alamofire.request(urlRequest,
                                         method: .get,
                                         parameters: params,
-                                        encoding: URLEncoding.default,
+                                        encoding: getParameterEncoding(),
                                         headers: header)
         
         request.responseJSON { (response) in
