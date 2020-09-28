@@ -27,7 +27,7 @@ public class ApiRequest: NSObject, ApiCommand {
     public var params: [String: Any] = [:]
     public var header: [String: String] = [:]
     public var urlRequest = ""
-    var image: UIImage?
+    public var image: UIImage?
 
     
     func getParameterEncoding() -> ParameterEncoding {
