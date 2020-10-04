@@ -28,6 +28,7 @@ public class ApiRequest: NSObject, ApiCommand {
     public var header: [String: String] = [:]
     public var urlRequest = ""
     public var image: UIImage?
+    public var imageParameterName: String?
 
     
     func getParameterEncoding() -> ParameterEncoding {
@@ -131,10 +132,10 @@ public class ApiRequest: NSObject, ApiCommand {
                    return
                }
                
+        let name = imageParameterName ?? "image_data"
         Alamofire.upload(multipartFormData:{ multipartFormData in
             debugPrint("fffffff")
             let fileName = "image_\(Date().timeIntervalSince1970).png"
-            let name = "image_data"
             let mimeType = "png"
             multipartFormData.append(imageData, withName: name, fileName: fileName, mimeType: mimeType)
                 },
@@ -242,11 +243,10 @@ public class ApiRequest: NSObject, ApiCommand {
             fail(ErrorApp.defaultError(message: nil))
             return
         }
-        
+        let name = imageParameterName ?? "image_data"
         Alamofire.upload(multipartFormData:{ multipartFormData in
             debugPrint("fffffff")
             let fileName = "image.png"
-            let name = "image_data"
             let mimeType = "png"
             multipartFormData.append(imageData, withName: name, fileName: fileName, mimeType: mimeType)
                 },
@@ -257,10 +257,6 @@ public class ApiRequest: NSObject, ApiCommand {
                          encodingCompletion: { encodingResult in
                             switch encodingResult {
                             case .success(let upload, _, _):
-                                
-                                upload.responseString(completionHandler: { (response) in
-                                    print("responseString: \(response)")
-                                })
                                 
                                 upload.responseJSON { response in
                                     ApiParser.parserResponseList(response: response,
@@ -350,15 +346,15 @@ public class ApiRequest: NSObject, ApiCommand {
         
     func uploadImage<T:Codable>(image: UIImage, success: @escaping (ApiResult<T>) -> (), fail: @escaping (ErrorApp) -> ()) {
         
-        guard let imageData = image.pngData()else {
+        guard let imageData = image.pngData() else {
             fail(ErrorApp.defaultError(message: nil))
             return
         }
         
+        let name = imageParameterName ?? "image_data"
         Alamofire.upload(multipartFormData:{ multipartFormData in
             debugPrint("fffffff")
             let fileName = "image.png"
-            let name = "image_data"
             let mimeType = "png"
             multipartFormData.append(imageData, withName: name, fileName: fileName, mimeType: mimeType)
                 },
@@ -369,11 +365,6 @@ public class ApiRequest: NSObject, ApiCommand {
                          encodingCompletion: { encodingResult in
                             switch encodingResult {
                             case .success(let upload, _, _):
-                                
-                                upload.responseString(completionHandler: { (response) in
-                                    print("responseString: \(response)")
-                                })
-                                
                                 upload.responseJSON { response in
                                     ApiParser.parserResponse(response: response,
                                                             success: success,
@@ -467,10 +458,10 @@ public class ApiRequest: NSObject, ApiCommand {
                    return
                }
                
+        let name = imageParameterName ?? "image_data"
         Alamofire.upload(multipartFormData:{ multipartFormData in
             debugPrint("fffffff")
             let fileName = "image.png"
-            let name = "image_data"
             let mimeType = "png"
             multipartFormData.append(imageData, withName: name, fileName: fileName, mimeType: mimeType)
                 },
@@ -481,11 +472,6 @@ public class ApiRequest: NSObject, ApiCommand {
                          encodingCompletion: { encodingResult in
                             switch encodingResult {
                             case .success(let upload, _, _):
-                                
-                                upload.responseString(completionHandler: { (response) in
-                                    print("responseString: \(response)")
-                                })
-                                
                                 upload.responseJSON { response in
                                     ApiParser.parserResponseObject(response: response,
                                                             success: success,
@@ -526,6 +512,3 @@ public struct JSONStringArrayEncoding: ParameterEncoding {
         return urlRequest
     }
 }
-
-
-
