@@ -15,9 +15,10 @@ public enum ApiRequestType {
     case get
     case upload
     case put
+    case del
 }
 
-public class ApiRequest: NSObject, ApiCommand {
+open class ApiRequest: NSObject, ApiCommand {
     
     public override init() {
         super.init()
@@ -47,7 +48,7 @@ public class ApiRequest: NSObject, ApiCommand {
         self.type = type
     }
     
-   public  func getParam() -> [String: Any] {
+   open func getParam() -> [String: Any] {
         return params
     }
     
@@ -73,6 +74,9 @@ public class ApiRequest: NSObject, ApiCommand {
                case .put:
                    PUTWithResponseListPaging(success: success, fail: fail)
 
+               case .del:
+                   DELWithResponseListPaging(success: success, fail: fail)
+
                    break
                }
     }
@@ -90,6 +94,22 @@ public class ApiRequest: NSObject, ApiCommand {
             ApiParser.parserResponseListPaging(response: response,
                                      success: success,
                                      fail: fail)
+        }
+    }
+    
+    func DELWithResponseListPaging<T:Codable>(success: @escaping (ApiResultPaging<T>) -> (), fail: @escaping (ErrorApp) -> ()) {
+
+        let request = Alamofire.request(urlRequest,
+                                        method: .delete,
+                                        parameters: params,
+                                        encoding: getParameterEncoding(),
+                                        headers: header)
+        
+        request.responseJSON { (response) in
+            debugPrint("response: ", response)
+            ApiParser.parserResponseListPaging(response: response,
+                                    success: success,
+                                    fail: fail)
         }
     }
     
@@ -172,21 +192,40 @@ public class ApiRequest: NSObject, ApiCommand {
                debugPrint("header: ", self.header)
                debugPrint("Type: ", self.type)
 
-               switch type {
-               case .get:
-                   GETWithResponseList(success: success, fail: fail)
-                   
-               case .post:
-                   POSTWithResponseList(success: success, fail: fail)
-                   
-               case .upload:
-                   uploadImageWithResponseList(image: image!, success: success, fail: fail)
-                   
-               case .put:
-                   PUTWithResponseList(success: success, fail: fail)
-
-                   break
-               }
+        switch type {
+        case .get:
+            GETWithResponseList(success: success, fail: fail)
+            
+        case .post:
+            POSTWithResponseList(success: success, fail: fail)
+            
+        case .upload:
+            uploadImageWithResponseList(image: image!, success: success, fail: fail)
+            
+        case .put:
+            PUTWithResponseList(success: success, fail: fail)
+            
+        case .del:
+            DELWithResponseList(success: success, fail: fail)
+            
+            break
+        }
+    }
+    
+    func DELWithResponseList<T:Codable>(success: @escaping (_ listItem: [T]) -> (), fail: @escaping (ErrorApp) -> ()) {
+        
+        let request = Alamofire.request(urlRequest,
+                                        method: .delete,
+                                        parameters: params,
+                                        encoding: getParameterEncoding(),
+                                        headers: header)
+        
+        request.responseJSON { (response) in
+            debugPrint("response: ", response)
+            ApiParser.parserResponseList(response: response,
+                                     success: success,
+                                     fail: fail)
+        }
     }
     
     func PUTWithResponseList<T:Codable>(success: @escaping (_ listItem: [T]) -> (), fail: @escaping (ErrorApp) -> ()) {
@@ -292,7 +331,26 @@ public class ApiRequest: NSObject, ApiCommand {
         case .put:
             PUT(success: success, fail: fail)
 
+        case .del:
+            DEL(success: success, fail: fail)
+
             break
+        }
+    }
+    
+    func DEL<T:Codable>(success: @escaping (ApiResult<T>) -> (), fail: @escaping (ErrorApp) -> ()) {
+        
+        let request = Alamofire.request(urlRequest,
+                                        method: .delete,
+                                        parameters: params,
+                                        encoding: getParameterEncoding(),
+                                        headers: header)
+        
+        request.responseJSON { (response) in
+            debugPrint("response: ", response)
+            ApiParser.parserResponse(response: response,
+                                     success: success,
+                                     fail: fail)
         }
     }
     
@@ -400,9 +458,29 @@ public class ApiRequest: NSObject, ApiCommand {
         case .put:
             PUTWithObject(success: success, fail: fail)
 
+        case .del:
+            DELWithObject(success: success, fail: fail)
+
             break
         }
     }
+    
+    func DELWithObject<T:Codable>(success: @escaping (T) -> (), fail: @escaping (ErrorApp) -> ()) {
+        
+        let request = Alamofire.request(urlRequest,
+                                        method: .delete,
+                                        parameters: params,
+                                        encoding: getParameterEncoding(),
+                                        headers: header)
+        
+        request.responseJSON { (response) in
+            debugPrint("response: ", response)
+            ApiParser.parserResponseObject(response: response,
+                                     success: success,
+                                     fail: fail)
+        }
+    }
+
     
     func PUTWithObject<T:Codable>(success: @escaping (T) -> (), fail: @escaping (ErrorApp) -> ()) {
         
