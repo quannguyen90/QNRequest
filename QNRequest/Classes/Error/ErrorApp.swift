@@ -30,6 +30,7 @@ public enum ErrorApp: Error {
     case loginFailed(message: String?)
     case parserData
     case sessionExpired(message: String?)
+    case errorData(message: String?, code: Int)
     
     public func getCode() -> Int {
         switch self {
@@ -47,6 +48,8 @@ public enum ErrorApp: Error {
             
         case .sessionExpired:
             return ERROR_CODE_SESSION_EXPIRED
+        case .errorData(message: _, code: let code):
+            return code
         }
         
     }
@@ -68,6 +71,8 @@ public enum ErrorApp: Error {
         case .sessionExpired(message: let message):
             return message ??  ERROR_MESSAGE_SESSION_EXPIRED
 
+        case .errorData(message: let mes, code: _):
+            return mes ??  ERROR_MESSAGE_SESSION_EXPIRED
         }
     }
     
@@ -81,6 +86,10 @@ public enum ErrorApp: Error {
         let errorCode = data["code"] as? Int
         if errorCode == ERROR_CODE_SESSION_EXPIRED {
             return ErrorApp.sessionExpired(message: errorMessage)
+        }
+        
+        if let code = errorCode {
+            return ErrorApp.errorData(message: errorMessage, code: code)
         }
 
         return ErrorApp.defaultError(message: errorMessage)
