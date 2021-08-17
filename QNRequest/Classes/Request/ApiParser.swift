@@ -135,5 +135,26 @@ public class ApiParser: NSObject {
         }
     }
 
+    class func parserResponseDict(response: DataResponse<Any>, success:([String : Any]) -> (), fail: (ErrorApp) -> ()) {
+        guard response.result.isSuccess else {
+            fail(ErrorApp.httpError)
+            return
+        }
+        
+        if let JSON = response.result.value as? [String: Any] {
+            guard let error = ErrorApp.parserError(errorData: JSON) else {
+                success(JSON)
+                return
+            }
+            
+            if error.getCode() == ErrorApp.sessionExpired(message: nil).getCode()  {
+//                Helper.helper.logout()
+            }
+            
+            fail(error)
+        } else {
+            fail(ErrorApp.parserData)
+        }
+    }
 }
 
