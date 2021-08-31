@@ -52,134 +52,6 @@ open class ApiRequest: NSObject, ApiCommand {
         return params
     }
     
-    // Response Dict
-    func excuteResponseDict(success: @escaping ([String : Any]) -> (), fail: @escaping (ErrorApp) -> ()) {
-        self.params = getParam()
-               debugPrint("---------------- request ---------------")
-               debugPrint("url: ", urlRequest)
-               debugPrint("param: ", self.params)
-               debugPrint("header: ", self.header)
-               debugPrint("Type: ", self.type)
-
-               switch type {
-               case .get:
-                   GETWithResponseDict(success: success, fail: fail)
-                   
-               case .post:
-                   POSTWithResponseDict(success: success, fail: fail)
-                   
-               case .upload:
-                   uploadImageWithResponseDict(image: image!, success: success, fail: fail)
-                   
-               case .put:
-                   PUTWithResponseDict(success: success, fail: fail)
-                   break
-                
-               case .del:
-                DELETEWithResponseDict(success: success, fail: fail)
-               }
-    }
-    
-    func PUTWithResponseDict(success: @escaping ([String : Any]) -> (), fail: @escaping (ErrorApp) -> ()) {
-        
-        let request = Alamofire.request(urlRequest,
-                                        method: .put,
-                                        parameters: params,
-                                        encoding: JSONStringArrayEncoding.init(array: []),
-                                        headers: header)
-        
-        request.responseJSON { (response) in
-            debugPrint("response: ", response)
-            ApiParser.parserResponseDict(response: response,
-                                     success: success,
-                                     fail: fail)
-        }
-    }
-    
-    func POSTWithResponseDict(success: @escaping ([String : Any]) -> (), fail: @escaping (ErrorApp) -> ()) {
-
-        let request = Alamofire.request(urlRequest,
-                                        method: .post,
-                                        parameters: params,
-                                        encoding: JSONStringArrayEncoding.init(array: []),
-                                        headers: header)
-        
-        request.responseJSON { (response) in
-            debugPrint("response: ", response)
-            ApiParser.parserResponseDict(response: response,
-                                    success: success,
-                                    fail: fail)
-        }
-    }
-    
-    func GETWithResponseDict(success: @escaping ([String : Any]) -> (), fail: @escaping (ErrorApp) -> ()) {
-        
-        let request = Alamofire.request(urlRequest,
-                                        method: .get,
-                                        parameters: params,
-                                        encoding: URLEncoding.default,
-                                        headers: header)
-        
-        request.responseJSON { (response) in
-            debugPrint("response: ", response)
-            ApiParser.parserResponseDict(response: response,
-                                    success: success,
-                                    fail: fail)
-        }
-    }
-    
-    func DELETEWithResponseDict(success: @escaping ([String : Any]) -> (), fail: @escaping (ErrorApp) -> ()) {
-        
-        let request = Alamofire.request(urlRequest,
-                                        method: .delete,
-                                        parameters: params,
-                                        encoding: URLEncoding.default,
-                                        headers: header)
-        
-        request.responseJSON { (response) in
-            debugPrint("response: ", response)
-            ApiParser.parserResponseDict(response: response,
-                                    success: success,
-                                    fail: fail)
-        }
-    }
-        
-    func uploadImageWithResponseDict(image: UIImage, success: @escaping ([String : Any]) -> (), fail: @escaping (ErrorApp) -> ()) {
-        
-        let imageData = image.pngData()!
-        
-        Alamofire.upload(multipartFormData:{ multipartFormData in
-            debugPrint("fffffff")
-            let fileName = "image.png"
-            let name = "image_data"
-            let mimeType = "png"
-            multipartFormData.append(imageData, withName: name, fileName: fileName, mimeType: mimeType)
-                },
-                         usingThreshold:UInt64.init(),
-                         to:urlRequest,
-                         method:.post,
-                         headers:header,
-                         encodingCompletion: { encodingResult in
-                            switch encodingResult {
-                            case .success(let upload, _, _):
-                                
-                                upload.responseString(completionHandler: { (response) in
-                                    print("responseString: \(response)")
-                                })
-                                
-                                upload.responseJSON { response in
-                                    ApiParser.parserResponseDict(response: response,
-                                                            success: success,
-                                                            fail: fail)
-                                }
-                            case .failure(let encodingError):
-                                fail(ErrorApp.httpError)
-                                print("uploadError: " + encodingError.localizedDescription)
-                            }
-        })
-    }
-    
-    
     // MARK: response List Object paging
     public func excuteWithResponseListPaging<T:Codable>(success: @escaping (ApiResultPaging<T>) -> (), fail: @escaping (ErrorApp) -> ()) {
         self.params = getParam()
@@ -305,7 +177,7 @@ open class ApiRequest: NSObject, ApiCommand {
                                                             fail: fail)
                                 }
                             case .failure(let encodingError):
-                                fail(ErrorApp.httpError)
+                                fail(ErrorApp.httpError(message: ERROR_MESSAGE_HTTP, code: ERROR_CODE_HTTP))
                                 print("uploadError: " + encodingError.localizedDescription)
                             }
         })
@@ -431,7 +303,7 @@ open class ApiRequest: NSObject, ApiCommand {
                                                             fail: fail)
                                 }
                             case .failure(let encodingError):
-                                fail(ErrorApp.httpError)
+                                fail(ErrorApp.httpError(message: ERROR_MESSAGE_HTTP, code: ERROR_CODE_HTTP))
                                 print("uploadError: " + encodingError.localizedDescription)
                             }
         })
@@ -557,7 +429,7 @@ open class ApiRequest: NSObject, ApiCommand {
                                                             fail: fail)
                                 }
                             case .failure(let encodingError):
-                                fail(ErrorApp.httpError)
+                                fail(ErrorApp.httpError(message: ERROR_MESSAGE_HTTP, code: ERROR_CODE_HTTP))
                                 print("uploadError: " + encodingError.localizedDescription)
                             }
         })
@@ -684,7 +556,7 @@ open class ApiRequest: NSObject, ApiCommand {
                                                             fail: fail)
                                 }
                             case .failure(let encodingError):
-                                fail(ErrorApp.httpError)
+                                fail(ErrorApp.httpError(message: ERROR_MESSAGE_HTTP, code: ERROR_CODE_HTTP))
                                 print("uploadError: " + encodingError.localizedDescription)
                             }
         })
