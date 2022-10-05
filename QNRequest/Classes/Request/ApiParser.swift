@@ -9,7 +9,6 @@
 import UIKit
 import Alamofire
 
-
 public let NOTIFICATION_SESSION_EXPIRED = "NOTIFICATION_SESSION_EXPIRED"
 public class ApiParser: NSObject {
     
