@@ -171,7 +171,7 @@ class ViewController: UIViewController {
 class ApiOperations {
     static func login(_ email: String,
                               password: String,
-                              success: @escaping (_ userInfo: ApiResult<IPUser>) -> (),
+                              success: @escaping (_ userInfo: ApiResult<User>) -> (),
                               fail: @escaping (ErrorApp) -> ()) {
         let url = AppApiConstant.getUrlRequest(apiType: .auth, apiName: "login", version: "v1")
         let api = ApiRequest(urlRequest: url, type: .post)
@@ -182,7 +182,7 @@ class ApiOperations {
     }
     
     static func getConfig(
-           success: @escaping (_ userInfo: ApiResultPaging<IPConfig>) -> (),
+           success: @escaping (_ userInfo: ApiResultPaging<Config>) -> (),
            fail: @escaping (ErrorApp) -> ()) {
            
            let url = AppApiConstant.getUrlRequest(apiType: .common, apiName: "config", version: "v1")

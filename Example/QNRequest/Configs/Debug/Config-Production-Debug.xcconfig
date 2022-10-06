@@ -14,5 +14,4 @@
 PRODUCT_DISPLAY_NAME=iPOS Billing
 HTTP_PROTOCOL=https
 BASE_URL_API_ENDPOINT=apibilling.iposdev.com/billing
-//BASE_URL_API_ENDPOINT=apibilling.ipos.vn/billing
 SERVICE_PATH=billing

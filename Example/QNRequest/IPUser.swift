@@ -19,7 +19,7 @@ import UIKit
 "facebookLink":"",
 "code":"NV001"*/
 
-class IPUser: Codable {
+class User: Codable {
     
     var id: String?
     var code: String?

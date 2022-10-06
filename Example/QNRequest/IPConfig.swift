@@ -8,7 +8,7 @@
 
 import UIKit
 
-class IPConfig: Codable {
+class Config: Codable {
     var key: String?
     var value: String?
     
