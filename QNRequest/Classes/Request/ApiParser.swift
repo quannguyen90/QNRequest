@@ -40,7 +40,8 @@ public class ApiParser: NSObject {
             }
             
             if error.getCode() == ErrorApp.sessionExpired(message: nil).getCode()  {
-                
+                fail(ErrorApp.httpError(message: error.getMessage(), code: error.getCode()))
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NOTIFICATION_SESSION_EXPIRED), object: nil)
             }
             
             fail(error)
@@ -77,7 +78,8 @@ public class ApiParser: NSObject {
             }
             
             if error.getCode() == ErrorApp.sessionExpired(message: nil).getCode()  {
-//                Helper.helper.logout()
+                fail(ErrorApp.httpError(message: error.getMessage(), code: error.getCode()))
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NOTIFICATION_SESSION_EXPIRED), object: nil)
             }
             
             fail(error)
@@ -114,7 +116,8 @@ public class ApiParser: NSObject {
             }
             
             if error.getCode() == ErrorApp.sessionExpired(message: nil).getCode()  {
-                
+                fail(ErrorApp.httpError(message: error.getMessage(), code: error.getCode()))
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NOTIFICATION_SESSION_EXPIRED), object: nil)
             }
             
             fail(error)
@@ -151,7 +154,8 @@ public class ApiParser: NSObject {
             }
             
             if error.getCode() == ErrorApp.sessionExpired(message: nil).getCode()  {
-//                Helper.helper.logout()
+                fail(ErrorApp.httpError(message: error.getMessage(), code: error.getCode()))
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NOTIFICATION_SESSION_EXPIRED), object: nil)
             }
             
             fail(error)
