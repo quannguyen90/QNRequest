@@ -30,6 +30,7 @@ open class ApiRequest: NSObject, ApiCommand {
     public var urlRequest = ""
     public var image: UIImage?
     public var imageParameterName: String?
+    public var imageName: String?
 
     
     func getParameterEncoding() -> ParameterEncoding {
@@ -155,7 +156,7 @@ open class ApiRequest: NSObject, ApiCommand {
         let name = imageParameterName ?? "image_data"
         Alamofire.upload(multipartFormData:{ multipartFormData in
             debugPrint("fffffff")
-            let fileName = "image_\(Date().timeIntervalSince1970).png"
+            let fileName = self.imageName ?? "image_\(Date().timeIntervalSince1970).png"
             let mimeType = "png"
             multipartFormData.append(imageData, withName: name, fileName: fileName, mimeType: mimeType)
                 },
@@ -285,7 +286,7 @@ open class ApiRequest: NSObject, ApiCommand {
         let name = imageParameterName ?? "image_data"
         Alamofire.upload(multipartFormData:{ multipartFormData in
             debugPrint("fffffff")
-            let fileName = "image.png"
+            let fileName = self.imageName ?? "image_\(Date().timeIntervalSince1970).png"
             let mimeType = "png"
             multipartFormData.append(imageData, withName: name, fileName: fileName, mimeType: mimeType)
                 },
@@ -412,7 +413,7 @@ open class ApiRequest: NSObject, ApiCommand {
         let name = imageParameterName ?? "image_data"
         Alamofire.upload(multipartFormData:{ multipartFormData in
             debugPrint("fffffff")
-            let fileName = "image.png"
+            let fileName = self.imageName ?? "image_\(Date().timeIntervalSince1970).png"
             let mimeType = "png"
             multipartFormData.append(imageData, withName: name, fileName: fileName, mimeType: mimeType)
                 },
@@ -539,7 +540,7 @@ open class ApiRequest: NSObject, ApiCommand {
         let name = imageParameterName ?? "image_data"
         Alamofire.upload(multipartFormData:{ multipartFormData in
             debugPrint("fffffff")
-            let fileName = "image.png"
+            let fileName = self.imageName ?? "image_\(Date().timeIntervalSince1970).png"
             let mimeType = "png"
             multipartFormData.append(imageData, withName: name, fileName: fileName, mimeType: mimeType)
                 },
