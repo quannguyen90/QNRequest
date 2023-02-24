@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (4.9.1)
-  - QNRequest (1.0.1):
+  - QNRequest (1.4.1):
     - Alamofire (~> 4.9.1)
 
 DEPENDENCIES:
@@ -16,8 +16,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
-  QNRequest: 11be0d1179fd6bfe89a52d3d55abece935ae58a0
+  QNRequest: d939f0d96ab091ba0a3dc900545c1701afa51283
 
 PODFILE CHECKSUM: 863e273a8f110822fd0dbb2ee3e6cec18f0b3384
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.11.2

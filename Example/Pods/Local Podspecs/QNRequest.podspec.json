@@ -1,6 +1,9 @@
 {
   "name": "QNRequest",
-  "version": "1.0.1",
+  "swift_versions": [
+    "5.0"
+  ],
+  "version": "1.4.1",
   "summary": "A short description of QNRequest.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/quannguyen90/QNRequest",
@@ -12,8 +15,7 @@
     "quannguyen90": "quannv.tm@gmail.com"
   },
   "source": {
-    "git": "https://github.com/quannguyen90/QNRequest.git",
-    "tag": "1.0.1"
+    "git": "https://github.com/quannguyen90/QNRequest.git"
   },
   "platforms": {
     "ios": "10.0"
@@ -23,5 +25,6 @@
     "Alamofire": [
       "~> 4.9.1"
     ]
-  }
+  },
+  "swift_version": "5.0"
 }

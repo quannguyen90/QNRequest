@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.swift_versions = ['5.0']
   s.name             = 'QNRequest'
-  s.version          = '1.4.1'
+  s.version          = '2.0.0'
   s.summary          = 'A short description of QNRequest.'
 
 # This description is used to generate tags and improve search results.
