@@ -19,7 +19,7 @@ public enum ApiRequestType {
 }
 
 open class ApiRequest: NSObject, ApiCommand {
-        
+    
     public override init() {
         super.init()
     }
@@ -31,7 +31,7 @@ open class ApiRequest: NSObject, ApiCommand {
     public var image: UIImage?
     public var imageParameterName: String?
     public var imageName: String?
-
+    
     func getParameterEncoding() -> ParameterEncoding {
         if type == .get {
             return URLEncoding.default
@@ -43,12 +43,12 @@ open class ApiRequest: NSObject, ApiCommand {
         return URLEncoding.default
     }
     
-     public init(urlRequest: String, type: ApiRequestType) {
+    public init(urlRequest: String, type: ApiRequestType) {
         self.urlRequest = urlRequest
         self.type = type
     }
     
-   open func getParam() -> [String: Any] {
+    open func getParam() -> [String: Any] {
         return params
     }
     
@@ -56,10 +56,10 @@ open class ApiRequest: NSObject, ApiCommand {
     public func excute<T:Codable>(success: @escaping (T) -> (), fail: @escaping (ErrorApp) -> ()) {
         self.params = getParam()
         debugPrint("---------------- request ---------------")
-        debugPrint("url: ", urlRequest)
-        debugPrint("param: ", self.params)
-        debugPrint("header: ", self.header)
-        debugPrint("Type: ", self.type)
+//        debugPrint("url: ", urlRequest)
+//        debugPrint("param: ", self.params)
+//        debugPrint("header: ", self.header)
+//        debugPrint("Type: ", self.type)
         
         if type == .upload {
             uploadImage(image: image!, success: success, fail: fail)
@@ -79,12 +79,13 @@ open class ApiRequest: NSObject, ApiCommand {
         case .del:
             method = .delete
         }
-
+        
         let request = Alamofire.request(urlRequest,
                                         method: method,
                                         parameters: params,
                                         encoding: getParameterEncoding(),
                                         headers: header)
+        debugPrint(request)
         request.responseJSON { (response) in
             debugPrint("response: ", response)
             ApiParser.parserResponseObject(response: response, success: success, fail: fail)
@@ -92,7 +93,7 @@ open class ApiRequest: NSObject, ApiCommand {
         
     }
     
-        
+    
     func uploadImage<T:Codable>(image: UIImage, success: @escaping (T) -> (), fail: @escaping (ErrorApp) -> ()) {
         
         guard let imageData = image.pngData() else {
@@ -106,23 +107,24 @@ open class ApiRequest: NSObject, ApiCommand {
             let fileName = self.imageName ?? "image_\(Date().timeIntervalSince1970).png"
             let mimeType = "png"
             multipartFormData.append(imageData, withName: name, fileName: fileName, mimeType: mimeType)
-                },
+        },
                          usingThreshold:UInt64.init(),
                          to:urlRequest,
-                         method:.post,
+                         method: .post,
                          headers:header,
                          encodingCompletion: { encodingResult in
-                            switch encodingResult {
-                            case .success(let upload, _, _):
-                                upload.responseJSON { response in
-                                    ApiParser.parserResponseObject(response: response,
-                                                            success: success,
-                                                            fail: fail)
-                                }
-                            case .failure(let encodingError):
-                                fail(ErrorApp.httpError(message: ERROR_MESSAGE_HTTP, code: ERROR_CODE_HTTP))
-                                print("uploadError: " + encodingError.localizedDescription)
-                            }
+            switch encodingResult {
+            case .success(let upload, _, _):
+                debugPrint(upload)
+                upload.responseJSON { response in
+                    ApiParser.parserResponseObject(response: response,
+                                                   success: success,
+                                                   fail: fail)
+                }
+            case .failure(let encodingError):
+                fail(ErrorApp.httpError(message: ERROR_MESSAGE_HTTP, code: ERROR_CODE_HTTP))
+                print("uploadError: " + encodingError.localizedDescription)
+            }
         })
     }
 }

@@ -19,6 +19,12 @@ public class ApiParser: NSObject {
 
         if response.response?.statusCode == 401 {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: NOTIFICATION_SESSION_EXPIRED), object: nil)
+            if let dict = (response.result.value) as? [String: Any], let error = ErrorApp.parserError(errorData: dict) {
+                fail(error)
+                return
+            } else {
+                fail(ErrorApp.httpError(message: ERROR_MESSAGE_SESSION_EXPIRED, code: ERROR_CODE_SESSION_EXPIRED))
+            }
             return
         }
 
