@@ -10,18 +10,24 @@ import Foundation
 
 public class ApiResultPaging<T:Codable>: Codable {
     public var data: [T]?
+    public var numResults: Int?
     
     private enum CodingKeys : String, CodingKey {
         case data = "data"
+        case numResults = "num_results"
+    }
+    
+    public init(data: [Codable]? = nil, numResults: Int? = nil) {
+        self.data = data as! [T]
+        self.numResults = numResults
     }
 }
 
 
 public class ApiResult<T:Codable>: Codable {
     public var data: T?
+    
+    public init(data: Codable? = nil) {
+        self.data = data as! T
+    }
 }
-
-public class ApiAhamoveResult<T:Codable>: Codable {
-    public var features: [T]?
-}
-
